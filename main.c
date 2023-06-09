@@ -4,10 +4,10 @@
 #include <string.h>
 #include <util/delay.h>
 
-
+//s
 //// https://wokwi.com/projects/296234816685212169
 
-
+ 
 int main()
 {
 	init_serial();
