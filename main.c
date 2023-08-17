@@ -6,6 +6,54 @@
 #include "millis.h"
 #include <stdbool.h>
 
+//3 * 3
+
+void clear(){
+	for(int col =3; col<6;col++)
+	{
+		max7219b_clr(col,3);
+		max7219b_clr(col,4);
+		max7219b_clr(col,5);
+	}
+}
+
+void draw(int tal){
+	if(tal == 1){
+		max7219b_set(4,4);
+	}
+	else if(tal == 2){
+		max7219b_set(3,3);
+		max7219b_set(5,5);
+	}
+	else if(tal == 3){
+		max7219b_set(3,3);
+		max7219b_set(4,4);
+		max7219b_set(5,5);
+	}
+	else if(tal == 4){
+		max7219b_set(3,3);
+		max7219b_set(3,5);
+		max7219b_set(5,3);
+		max7219b_set(5,5);
+	}
+	else if(tal == 5){
+		max7219b_set(3,3);
+		max7219b_set(3,5);
+		max7219b_set(4,4);
+		max7219b_set(5,3);
+		max7219b_set(5,5);
+	}
+	else if(tal == 6){
+		max7219b_set(3,3);
+		max7219b_set(3,4);
+		max7219b_set(3,5);
+		max7219b_set(5,3);
+		max7219b_set(5,4);
+		max7219b_set(5,5);
+	}
+	max7219b_out();
+}
+
 //s
 //// https://wokwi.com/projects/296234816685212169
 
@@ -21,11 +69,12 @@ int main()
 	int x = 0;
 	int y = 0;
 
-	volatile millis_t antalMilliSekunderSenasteBytet = 0;
-    bool shouldShowH = true;
-	bool first = true;
 
-	max7219b_set(0,0);
+	
+
+	volatile millis_t antalMilliSekunderSenasteBytet = 0;
+	bool first = true;
+	int tal = 1;
 
 	while (true) {
 
@@ -33,69 +82,12 @@ int main()
 		{
 			first = false;
 			//DAGS ATT GÖRA NÅT
-			if(shouldShowH){
-				//visa h
-				max7219b_clr(3,2);
-				max7219b_clr(3,3);
-				max7219b_clr(3,4);
-				max7219b_clr(3,5);
-				max7219b_clr(3,6);
-
-				max7219b_set(1,2);
-				max7219b_set(1,3);
-				max7219b_set(1,4);
-				max7219b_set(1,5);
-				max7219b_set(1,6);
-
-
-				max7219b_set(5,2);
-				max7219b_set(5,3);
-				max7219b_set(5,4);
-				max7219b_set(5,5);
-				max7219b_set(5,6);
-
-				max7219b_set(2,4);
-				max7219b_set(3,4);
-				max7219b_set(4,4);
-
-				max7219b_out();
-
-			}else{
-				//Visa I
-				max7219b_clr(1,2);
-				max7219b_clr(1,3);
-				max7219b_clr(1,4);
-				max7219b_clr(1,5);
-				max7219b_clr(1,6);
-
-
-				max7219b_clr(5,2);
-				max7219b_clr(5,3);
-				max7219b_clr(5,4);
-				max7219b_clr(5,5);
-				max7219b_clr(5,6);
-
-				max7219b_clr(2,4);
-				max7219b_clr(3,4);
-				max7219b_clr(4,4);
-
-
-				max7219b_set(3,2);
-				max7219b_set(3,3);
-				max7219b_set(3,4);
-				max7219b_set(3,5);
-				max7219b_set(3,6);
-
-				max7219b_out();
-			}
-			shouldShowH = !shouldShowH;										
+			clear();
+			draw(tal);
+			tal  = tal + 1;
+			if(tal > 6) tal = 1;
 			antalMilliSekunderSenasteBytet = millis_get();				
 		}
-		//ER UPPGIFT
-		// Skriv kod som blir mer generisk
-		// function writeLetter(x,y, clear Y/N)
-
-		
 
 	}
 	return 0;
