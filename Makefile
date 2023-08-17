@@ -10,8 +10,8 @@ CFLAGS=-Wall -Wextra  -Wundef -pedantic \
 LDFLAGS=-mmcu=$(MCU)
 PORT=\\\\.\\COM3
 BIN=avrdemo
-OUT=${BIN}.hex
-SOURCES = main.c max72xx.c uart.c millis.c
+OUT=${BIN}.hex 
+SOURCES = main.c max72xx.c uart.c millis.c analogRead.c
 
 DEBUG?=1
 
